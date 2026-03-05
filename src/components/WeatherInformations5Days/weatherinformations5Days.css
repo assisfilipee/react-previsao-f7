@@ -1,0 +1,234 @@
+.weather-container{
+  background: rgba(255,255,255,0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  border-radius: 15px;
+  padding: 20px;
+  margin: 30px 0;
+
+  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+}
+
+.weather-container > p{
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 12px;
+  letter-spacing: 0.3px;
+}
+
+/* animação de entrada */
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.forecast-item{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  background: rgba(255,255,255,0.20);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 12px;
+
+  padding: 12px 14px;
+  margin-top: 10px;
+
+  animation: cardIn 320ms ease both;
+}
+
+/* dia */
+.forecast-day{
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: #ffffff;
+  width: 62px;
+  text-transform: capitalize;
+}
+
+/* ícone */
+.forecast-icon{
+  width: 46px;
+  height: 46px;
+}
+
+/* miolo: descrição + min/max */
+.forecast-meta{
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+}
+
+.forecast-desc{
+  text-transform: capitalize;
+  color: rgba(0,0,0,0.78);
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.forecast-minmax{
+  margin-top: 2px;
+  font-weight: 800;
+  color: rgba(0,0,0,0.70);
+}
+
+.forecast-minmax .min{ opacity: 0.75; }
+.forecast-minmax .sep{ margin: 0 6px; opacity: 0.55; }
+.forecast-minmax .max{ opacity: 0.95; }
+
+/* temperatura atual daquele horário */
+.forecast-temp{
+  font-weight: 900;
+  font-size: 1.15rem;
+  color: #1a1a1a;
+  width: 64px;
+  text-align: right;
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================
+   RESPONSIVO — FORECAST LIST (itens + título)
+   Breakpoints solicitados:
+   - Mobile:        (max-width: 575.98px)
+   - Tablet Mini:   (min-width: 576px) and (max-width: 991.98px)
+
+   Objetivos:
+   - Sem scroll horizontal (principalmente por widths fixos)
+   - Texto com respiro nas bordas
+   - Ícones sem distorção
+   - Layout legível e “tocável” no mobile
+   - Não altera desktop (somente aqui dentro dos breakpoints)
+   ========================================================== */
+
+/* =========================
+   MOBILE (até 575.98px)
+   ========================= */
+@media (max-width: 575.98px){
+
+  /* card: ocupa largura disponível sem estourar */
+  .weather-container{
+    padding: 18px 16px;
+    margin: 18px 0;
+
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    border-radius: 14px;
+  }
+
+  /* título dentro do card com respiro */
+  .weather-container > p{
+    font-size: 1.15rem;
+    margin-bottom: 10px;
+    padding-inline: 6px;
+    overflow-wrap: anywhere;
+  }
+
+  /* item: mantém em linha, mas deixa o bloco confortável e sem overflow */
+  .forecast-item{
+    padding: 12px 12px;
+    gap: 10px;
+
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* dia: reduz um pouco pra sobrar espaço */
+  .forecast-day{
+    width: 52px;
+    font-size: 0.98rem;
+  }
+
+  /* ícone: reduz mantendo proporção */
+  .forecast-icon{
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    flex: 0 0 auto;
+  }
+
+  /* meta: garante quebra segura do container */
+  .forecast-meta{
+    min-width: 0;
+  }
+
+  /* descrição: no mobile, permite quebrar (evita “cortar demais”) */
+  .forecast-desc{
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    line-height: 1.15;
+    overflow-wrap: anywhere;
+  }
+
+  /* temp: reduz largura fixa para não forçar overflow */
+  .forecast-temp{
+    width: 54px;
+    font-size: 1.05rem;
+  }
+
+  /* min/max: melhora leitura quando a descrição quebra linha */
+  .forecast-minmax{
+    margin-top: 4px;
+    line-height: 1.15;
+  }
+}
+
+/* =========================
+   TABLET MINI (576px a 991.98px)
+   ========================= */
+@media (min-width: 576px) and (max-width: 991.98px){
+
+  .weather-container{
+    padding: 20px 18px;
+    margin: 22px 0;
+
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .weather-container > p{
+    font-size: 1.22rem;
+    padding-inline: 6px;
+    overflow-wrap: anywhere;
+  }
+
+  /* item: permite “respirar” e quebrar sem estourar */
+  .forecast-item{
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* ajusta pequenas larguras fixas para tablets mais estreitos */
+  .forecast-day{
+    width: 58px;
+  }
+
+  .forecast-temp{
+    width: 60px;
+  }
+
+  .forecast-icon{
+    object-fit: contain;
+  }
+
+  /* descrição: pode continuar com ellipsis, mas garante que não force overflow */
+  .forecast-meta{
+    min-width: 0;
+  }
+}
